@@ -5,20 +5,43 @@ var budgetController = (function() {
 
 // UI CONTROLLER
 var UIController = (function() {
-	// Some code
+	var domStrings = {
+		inputType: '.add__type',
+		inputDescription: '.add__description',
+		inputValue: '.add__value',
+		inputButton: '.add__btn'
+	}
+	
+	return {
+		getInput: function() {			
+			return {
+				type: document.querySelector(domStrings.inputType).value, // will be either inc or exp
+				description: document.querySelector(domStrings.inputDescription).value,
+				value: document.querySelector(domStrings.inputValue).value
+			};
+			// returning a object is a good way to return multiple variables
+		},
+		getDomStrings: function() {
+			return domStrings;
+		}
+	}
 })();
 
 // GLOBAL APP CONTROLLER
 var controller = (function(budgetCtrl, UICtrl) {
+	var dom = UICtrl.getDomStrings();
+	
 	var ctrlAddItem = function() {
 		// 1. Get the field input data
+		var input = UICtrl.getInput();
+		console.log(input);
+		
 		// 2. Add the item to the budget
 		// 3. Add the item to the uI
 		// 4. Calculate the budget
 		// 5. Display the budget on the UI
-		console.log('Hello Kratos!');
 	};
-	document.querySelector('.add__btn').addEventListener('click', ctrlAddItem);
+	document.querySelector(dom.inputButton).addEventListener('click', ctrlAddItem);
 	
 	document.addEventListener('keypress', function(event) {
 		if(event.keyCode === 13 || event.which === 13) {
